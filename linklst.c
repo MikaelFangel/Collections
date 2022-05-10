@@ -1,0 +1,146 @@
+#include "collections.h"
+
+/**
+ * Initializes a new emtpy linked list with size 0
+ * @return pointer to the new linked list
+ */
+linklst *linklst_init() {
+    linklst *list = (linklst *) malloc(sizeof(linklst));
+    list->size = 0;
+    list->head = NULL;
+    list->tail = NULL;
+
+    return list;
+}
+
+/**
+ * Create a new linked list node with all values initialized
+ * @return created node
+ */
+node *linklist_create_node() {
+    node *new_node = (node *) malloc(sizeof(node));
+    new_node->data = NULL;
+    new_node->next = NULL;
+    new_node->prev = NULL;
+
+    return new_node;
+}
+
+/**
+ * Adds a new node to the end of the linked list
+ * @param list node should be added to
+ * @param data the node should contain
+ * @param size of the data.
+ */
+void linklst_append(linklst *list, void *data, size_t size) {
+    if (list != NULL) {
+        node *new_node = linklist_create_node();
+        new_node->data = malloc(size);
+
+        memcpy(new_node->data, data, size + 1);
+
+        if (list->head == NULL) {
+            list->head = new_node;
+            list->tail = new_node;
+        } else {
+            new_node->prev = list->tail;
+            list->tail->next = new_node;
+            list->tail = new_node;
+        }
+
+        list->size++;
+    }
+}
+
+/**
+ * Adds a new node to the beginning of the linked list
+ * @param list node should be added to
+ * @param data the node should contain
+ * @param size of the data.
+ */
+void linklst_prepend(linklst *list, void *data, size_t size) {
+    if (list != NULL) {
+        node *new_node = linklist_create_node();
+        new_node->data = malloc(size);
+
+        memcpy(new_node->data, data, size + 1);
+
+        if (list->head == NULL) {
+            list->head = new_node;
+            list->tail = new_node;
+        } else {
+            new_node->next = list->head;
+            list->head->prev = new_node;
+            list->head = new_node;
+        }
+    }
+
+    list->size++;
+}
+
+/**
+ * Removes and frees the last node on the list
+ * @param list where the node should be popped
+ */
+void linklst_pop(linklst *list) {
+    if (list != NULL) {
+        if (list->size > 1) {
+            node *tail = list->tail;
+            list->tail = list->tail->prev;
+            list->tail->next = NULL;
+
+            free(tail->data);
+            tail->data = NULL;
+            free(tail);
+        } else if (list->size == 1) {
+            free(list->tail->data);
+            list->tail->data = NULL;
+
+            list->tail = NULL;
+            list->head = NULL;
+
+            free(list->tail);
+        }
+
+        if (list->size > 0)
+            list->size--;
+    }
+}
+
+/**
+ * Finds a node in a linked list based on its data
+ * @param list to search
+ * @param data to search for
+ * @return the node that contains the data
+ */
+node *linklst_find(linklst *list, void *data) {
+    if (list != NULL) {
+        node *curr_node = list->head;
+        while (curr_node != NULL) {
+            if (*(char *) data == *(char *) curr_node->data) {
+                return curr_node;
+            }
+            curr_node = curr_node->next;
+        }
+    }
+
+    return NULL;
+}
+
+/**
+ * Free all data, all nodes and the linked list from memory and sets all values to NULL
+ * @param list to free
+ */
+void linklst_free(linklst **list) {
+    if (*list != NULL) {
+        linklst *remove = *list;
+        if (remove->size > 0) {
+            for (int i = 0; i < remove->size; ++i) {
+                linklst_pop(*list);
+            }
+        }
+
+        free(*list);
+        *list = NULL;
+    }
+}
