@@ -39,6 +39,6 @@ extern void linklst_print(linklst *list, void(*fptr)(void *));
 // Array List
 
 // Printing
-extern void printString(void * s);
+extern void print_string(void * s);
 
 #endif //ALGORITHM_COLLECTIONS_H

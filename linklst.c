@@ -145,6 +145,12 @@ void linklst_free(linklst **list) {
     }
 }
 
+/**
+ * Iterates the list from the head to the tail and executes the function pointer
+ * on the node data. Function is intended for printing the list.
+ * @param list to operate on
+ * @param fptr to printing function
+ */
 void linklst_print(linklst *list, void(*fptr)(void *)) {
     if (list != NULL) {
         node *curr_node = list->head;
@@ -155,7 +161,11 @@ void linklst_print(linklst *list, void(*fptr)(void *)) {
     }
 }
 
-void printString(void *s) {
+/**
+ * Prints a string from a void pointer
+ * @param s pointer to beginning of string
+ */
+void print_string(void *s) {
     while (*(char *) s != '\0') {
         printf("%c", *(char *) s);
         s++;
