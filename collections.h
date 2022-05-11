@@ -30,7 +30,7 @@ extern void linklst_prepend(linklst *link, void *data, size_t);
 
 extern void linklst_pop(linklst *list);
 
-extern node *linklst_find(linklst *list, void *data);
+extern node *linklst_find(linklst *list, void *data, bool(*fptr)(void *, void *));
 
 extern void linklst_free(linklst **list);
 
@@ -39,6 +39,8 @@ extern void linklst_print(linklst *list, void(*fptr)(void *));
 // Array List
 
 // Printing
-extern void print_string(void * s);
+extern void print_string(void *s);
+
+extern bool compare_string(void *s1, void *s2);
 
 #endif //ALGORITHM_COLLECTIONS_H

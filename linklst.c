@@ -111,13 +111,14 @@ void linklst_pop(linklst *list) {
  * Finds a node in a linked list based on its data
  * @param list to search
  * @param data to search for
+ * @param fptr compare function for the node data
  * @return the node that contains the data
  */
-node *linklst_find(linklst *list, void *data) {
+node *linklst_find(linklst *list, void *data, bool(*fptr)(void *, void *)) {
     if (list != NULL) {
         node *curr_node = list->head;
         while (curr_node != NULL) {
-            if (*(char *) data == *(char *) curr_node->data) {
+            if ((*fptr)(curr_node->data, data)) {
                 return curr_node;
             }
             curr_node = curr_node->next;
@@ -172,4 +173,11 @@ void print_string(void *s) {
     }
 
     printf("\n");
+}
+
+bool compare_string(void *s1, void *s2) {
+    if (strcmp((char *) s1, (char *) s2) == 0)
+        return true;
+    else
+        return false;
 }
