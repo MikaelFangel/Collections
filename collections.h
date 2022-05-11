@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdio.h>
 
 // Linked List
 
@@ -33,5 +34,11 @@ extern node *linklst_find(linklst *list, void *data);
 
 extern void linklst_free(linklst **list);
 
+extern void linklst_print(linklst *list, void(*fptr)(void *));
+
 // Array List
+
+// Printing
+extern void printString(void * s);
+
 #endif //ALGORITHM_COLLECTIONS_H

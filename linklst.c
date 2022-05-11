@@ -144,3 +144,22 @@ void linklst_free(linklst **list) {
         *list = NULL;
     }
 }
+
+void linklst_print(linklst *list, void(*fptr)(void *)) {
+    if (list != NULL) {
+        node *curr_node = list->head;
+        while (curr_node != NULL) {
+            (*fptr)(curr_node->data);
+            curr_node = curr_node->next;
+        }
+    }
+}
+
+void printString(void *s) {
+    while (*(char *) s != '\0') {
+        printf("%c", *(char *) s);
+        s++;
+    }
+
+    printf("\n");
+}
