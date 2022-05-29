@@ -1,15 +1,9 @@
 #ifndef ALGORITHM_COLLECTIONS_H
 #define ALGORITHM_COLLECTIONS_H
 
-// Libs
-#include <stdlib.h>
-#include <string.h>
 #include <stdbool.h>
-#include <stdio.h>
 
 // Linked List
-
-// Structs
 typedef struct node {
     void *data;
     struct node *next;
