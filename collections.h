@@ -2,6 +2,7 @@
 #define ALGORITHM_COLLECTIONS_H
 
 #include <stdbool.h>
+#include <stdlib.h>
 
 // Linked List
 typedef struct node {
