@@ -16,7 +16,7 @@ typedef struct node {
     struct node *prev;
 } node;
 
-typedef struct {
+typedef struct linklst {
     int size;
     node *head;
     node *tail;
@@ -37,6 +37,20 @@ extern void linklst_free(linklst **list);
 extern void linklst_print(linklst *list, void(*fptr)(void *));
 
 // Array List
+typedef struct arrlst {
+    size_t block_size;
+    size_t size;
+    size_t buf;
+    void *list;
+} arrlst;
+
+arrlst *arrlst_init(size_t block_size);
+
+void add(arrlst *list, void *data);
+
+void resize_list(arrlst *list);
+
+void arrlst_free(arrlst *list);
 
 // Printing
 extern void print_string(void *s);
