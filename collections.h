@@ -41,9 +41,9 @@ typedef struct arrlst {
 
 arrlst *arrlst_init(size_t block_size);
 
-void add(arrlst *list, void *data);
+void arrlst_add(arrlst *list, void *data);
 
-void resize_list(arrlst *list);
+void resize_arrlst(arrlst *list);
 
 void arrlst_free(arrlst *list);
 
